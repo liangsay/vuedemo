@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue差值表达式</title>
+    <style>
+        /* 1.通过属性选择器，选择到带有v-cloak的元素，让其隐藏 */
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<!--<div id="use">-->
+<!--    <div>姓名：{{name}}</div>-->
+<!--    <div>性别：{{sex}}</div>-->
+<!--</div>-->
+<div id="msg">
+    <!-- 2.让带有差值语法的元素添加上v-cloak属性
+            在数据渲染完成之后v-cloak属性会被自动移除，
+            v-cloak一旦移除就相当于没有这个属性，属性选择器也就不会再选择到该标签
+         -->
+    <div v-cloak>
+        姓名2：{{name}}
+
+    </div>
+    <div v-cloak>
+        性别2：{{sex}}
+    </div>
+</div>
+<script src="lib/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#msg",
+        data: {
+            name: "张三",
+            sex: "男"
+        }
+    })
+</script>
+</body>
+</html>

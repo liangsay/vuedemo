@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="" rel="stylesheet">
+    <script src="lib/vue.js" type="text/javascript"></script>
+    <title>Title</title>
+</head>
+<body>
+<div id="box">
+<!--    数组遍历-->
+    <ul>
+        <li v-for="(data,index) in dataList">
+            {{index+1}}---{{data}}
+        </li>
+    </ul>
+    <ul>
+        <li v-for="(data,index) of dataList">
+            {{index+1}}---{{data}}
+        </li>
+    </ul>
+<!--    对象遍历-->
+    <ul>
+        <li v-for="(data,key) in obj">
+            {{key}}---{{data}}
+        </li>
+    </ul>
+    <ul>
+        <li v-for="(data,key) of obj">
+            {{key}}---{{data}}
+        </li>
+    </ul>
+</div>
+<script>
+    let vm = new Vue({
+        el:"#box", //vue渲染开始的地方
+        data: {
+            name:"校长",
+            isShow:true,
+            isCreated:false,
+            dataList: ["111","222",'333'],
+            obj:{
+                name:"Aben",
+                age:100,
+                sex:"boy"
+            },
+            which: 1
+        },//状态
+        methods: {
+            handleClick() {
+                this.isCreated = !this.isCreated
+                this.dataList = ["111","222"]
+            }
+        }
+    })
+    vm.$data.name = "我是"+vm.$data.name
+    vm.dataList.push("4444")
+</script>
+</body>
+</html>
