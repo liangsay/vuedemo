@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="" rel="stylesheet">
+    <script src="../lib/vue.js" type="text/javascript"></script>
+    <title>Title</title>
+</head>
+<body>
+<div id="box">
+    {{myName.substring(0,1).toUpperCase()+myName.substring(1)}}
+<!--    属性性能比方法高-->
+    <p>计算属性：{{getMyName}}</p>
+<!--    加小括号，且在methods里面-->
+    <p>普通方法：{{getMyNameMethod()}}</p>
+
+    <div>也需要计算结果
+        <p>计算属性：{{getMyName}}</p>
+        <p>计算方法：{{getMyNameMethod()}}</p>
+    </div>
+</div>
+<script type="text/javascript">
+    var vm = new Vue({
+        el:"#box", //vue渲染开始的地方
+        data: {//状态
+            myName:'xiaoming'
+        },
+        methods:{//方法
+            getMyNameMethod() {
+                console.log("getMyNameMethod-方法调用")
+                return this.myName.substring(0,1).toUpperCase()+this.myName.substring(1)
+            }
+        },
+        computed: {//属性
+            getMyName() {
+                console.log("getMyName-计算属性调用")
+                return this.myName.substring(0,1).toUpperCase()+this.myName.substring(1)
+            }
+            //1.依赖的状态改变了，计算属性会重新计算一遍
+            //2.计算属性会缓存
+        }
+    })
+</script>
+</body>
+</html>
