@@ -22,31 +22,25 @@
 
 <body>
 <div id="box">
-    <navbar @myevent="handleEvent($event)"></navbar>
-    <sidebar v-show="isShow"></sidebar>
+    <input type="text" ref="mytext"/>
+    <button @click="handleAdd()">add</button>
+    <child ref="mychild"></child>
 </div>
 <script type="text/javascript">
-Vue.component("navbar", {
-    template: `<div>
-        navbar
-        <button @click="handleClick()">navbar-button</button>
-    </div>`,
+<!--子组件-->
+Vue.component("child", {
+    template: `<div>child</div>`,
+    data() {
+      return {
+          childname: "子组件的状态"
+      }
+    },
     methods: {
-        handleClick() {
-            console.log("handleClick")
-            this.$emit("myevent")
+        add(data) {
+            console.log("子组件的方法:",data)
         }
     }
 })
-Vue.component("sidebar", {
-    template: `<div style="background: yellow;width: 200px;">
-                <ul>
-                    <li>111111</li>
-                    <li>111111</li>
-                    <li>111111</li>
-                </ul>
-</div>`
-});
 var vm = new Vue({
     el: "#box", //vue渲染开始的地方
     data: {
@@ -55,9 +49,17 @@ var vm = new Vue({
     methods: {
         handleEvent(ev) {
             this.isShow = !this.isShow
+        },
+        handleAdd() {
+            console.log("1111",this.$refs.mychild.childname);
+            this.$refs.mychild.add("孩子听话");
         }
     },
 });
+/**
+ * 1、ref放在标签上，拿到的是原始节点
+ * 2、ref放在组件上，拿到的是组件对象
+ */
 </script>
 </body>
 
